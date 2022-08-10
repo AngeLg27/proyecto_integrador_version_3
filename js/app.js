@@ -42,15 +42,40 @@ btn_registrarse.addEventListener("click", e => {
         mensajerError("Los campos no pueden ir vacios");
     }
 
-    if (input_password.value !== input_confirmar_password.value) {
+    else if (input_password.value !== input_confirmar_password.value) {
         e.preventDefault();
         mensajerError('Las contraseñas no coinciden');
         
     }
 
-    if (!emailRegex.test(input_correo.value)) {
+    else if (!emailRegex.test(input_correo.value)) {
         e.preventDefault();
         mensajerError("El correo no es valido, intentelo de nuevo")
+    }
+
+    else { 
+        
+        fetch("../Web-Hotel/php/hotel_consultas.php", {     //Cuando se pone un Bloque de codigo "{}" se trata de un Objeto
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json; charset=UTF-8"
+            },
+            body: JSON.stringify({                  //Stringify() ---> Función que da formato al objeto
+                _nombre: input_nombre.value,
+                _apellido: input_apellidos.value,
+                _email: input_correo.value,
+                _contrasenia: input_password.value
+            })
+        })                                              //Realizar la peticon al servidor
+            .then(function(respuesta){
+                return respuesta.text();
+            })                                          //Procesar el tipo de Respuesta
+            .then(function(texto){
+                console.log(texto);
+            })                                          //Procesar la Respuesta
+            .catch(function(err){
+                console.error('Error: ', err);
+            });   
     }
     
 });
