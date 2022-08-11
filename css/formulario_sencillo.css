@@ -135,3 +135,13 @@ label, input{
     border-radius: 1rem;
 }
 
+.mensaje-exito {
+    border: 1px solid lime;
+    margin-bottom: 1rem;
+    color: lime;
+    text-align: center;
+    font-weight: bold;
+    padding: 1rem 0;
+    background-color: #fff;
+    border-radius: 1rem;
+}

@@ -114,15 +114,10 @@ form.sign-up-form{
 }
 
 .btn{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
     width: 150px;
     height: 49px;
     border: none;
     outline: none;
-    text-align: center;
     border-radius: 49px;
     cursor: pointer;
     background-color: #5995fd;
@@ -231,8 +226,7 @@ form.sign-up-form{
     transform: translateX(800px);
 }
 
-
-
+/*Animación*/
 .container.sign-up-mode::before{
     transform: translate(100%, -50%);
     right: 52%;
@@ -314,7 +308,6 @@ form.sign-up-form{
 
     .panel h3{
         font-size: 1.2rem;
-        color: #000;
     }
 
     .panel p{

@@ -122,12 +122,12 @@ img {
 
 }
 
-@media screen and (max-width: 624px){
+@media screen and (max-width: 949px){
     .habitaciones {
         grid-template-columns: 1fr;
         column-gap: 0;
         row-gap: 2rem;
-        grid-template-rows: auto repeat(3, 586px);
+        grid-template-rows: auto repeat(3, 587px);
         grid-template-areas: 
         "title"
         "c1"

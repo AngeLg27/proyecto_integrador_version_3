@@ -20,8 +20,17 @@ function mensajerError(mensaje="") {
     setTimeout(() => alerta.remove(), 4000)
 }
 
+function mensajerExito(mensaje="") {
+    const alerta = document.createElement("div");
+    alerta.textContent = mensaje;
+    alerta.classList.add("mensaje-exito")
+    form.insertBefore(alerta, document.querySelector(".form__title"))
+    setTimeout(() => alerta.remove(), 4000)
+}
 
-
+addEventListener("DOMContentLoaded", () => {
+    mensajerExito("Registro Completado !")
+})
 
 function calcularDiasYPrecio(e) {
     e.preventDefault()
@@ -90,6 +99,34 @@ function calcularDiasYPrecio(e) {
 
 
     document.querySelector("#input-precioTotal").after(btn_comprar);
+    
+    btn_comprar.addEventListener('click', function(e) {
+
+        console.log('Click en comparar'); 
+        fetch("../web-hotel/php/hotel_hab_reservadas", {  
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json; charset=UTF-8"
+            },
+            body: JSON.stringify({                 
+                _no_personas: input__numero_persona.value,
+                _tipo_reserv: select_tipo_habitacion.value,
+                _fecha_ingreso: `${fechaEntrada.getFullYear()}-${fechaEntrada.getMonth() + 1}-${fechaEntrada.getDate()+1}`,
+                _fecha_salida: `${fechaSalida.getFullYear()}-${fechaSalida.getMonth() + 1}-${fechaSalida.getDate()+1}`,
+                _total_pagar: span_PrecioTotal.textContent,
+                _precio_noche: span_PrecioNoche.textContent
+            })
+        })                                              
+            .then(function(respuesta){
+                return respuesta.text();
+            })                                          
+            .then(function(texto){
+                console.log(texto);
+            })                                          
+            .catch(function(err){
+                console.error('Error: ', err);
+            });                                
+    });
 
 }
 
@@ -112,4 +149,3 @@ form.addEventListener("change", e => {
 });
 
 btn_calcular.addEventListener("click", calcularDiasYPrecio);
-
